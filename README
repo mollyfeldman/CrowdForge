@@ -5,14 +5,15 @@ Getting CrowdForge to run locally:
 
 1. Prerequisites: python, django, boto (tested with python-2.7,
 django-1.2.5 and boto-1.8d). Known issues with boto-1.9b.
-  - NOTE: There's a bug in boto-1.8d that you need to tweak. 
+  - NOTE: There's a bug in boto-1.8d that you need to tweak.
     Change connection.py:466 to say
-    
+
       value = self.connection.get_utf8_value(value)
 
     (instead of)
 
       value = self.get_utf8_value(value)
+   - install requirements via: pip install -r requirements.txt
 
 2. Download: go to https://github.com/borismus/CrowdForge and get the
 tarball.
@@ -23,7 +24,7 @@ tarball.
   - specify absolute URL to your templates directory
 5. Create database: run ./manage.py syncdb, create new account
 6. Run server: run ./manage.py runserver
-7. Test! 
+7. Test!
 8. Setup cron jobs!
 
 Testing CrowdForge
@@ -31,13 +32,13 @@ Testing CrowdForge
 1. Point browser to localhost:8000/admin (or whatever your production
 server URL is) and login.
 2. Add a new Problem instance. Give it a name and these parameters
-  - flow: SimpleFlow, 
+  - flow: SimpleFlow,
   - partition: create article
   - map: collect a fact
   - reduce: write a paragraph
 3. Run `./manage.py poll` manually, and a HIT should be created (check
 the MTurk server)
-  - expected output: 
+  - expected output:
 4. Do a sample HIT from the new HIT group
 5. Run `./manage.py poll` again, and a Result should be created locally
 (look in db or check http://localhost:8000/turk/problem/YOUR_PROBLEM_ID)
@@ -50,7 +51,7 @@ Setting up Cron Jobs
 1. So just tweak your crontab
   - `crontab -e`
   - Create a line that says something like
-  "*/15 * * * * /path/to/manage.py poll >> /path/to/crowdforge.log" 
+  "*/15 * * * * /path/to/manage.py poll >> /path/to/crowdforge.log"
 
 
 Getting CrowdForge deployed on a production server:
@@ -77,5 +78,5 @@ Advanced: Make your own flow
 1. Open crowdforge/flows.py
 2. Create your own subclass of Flow. See SimpleFlow for an example.
 3. Don't forget to register your new flow using
-  
+
   register('MyNewFlow', MyNewFlow)

@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+#Followed instructions here to set up virtual environment: https://djangowaves.com/tips-tricks/fix-import-error-no-module-named-django-core-management/
+#Currently get this error:
+#ImportError: Could not import settings 'CrowdForge.settings' (Is it on sys.path? Does it have syntax errors?): No module named settings
 from django.core.management import execute_manager
 try:
     import settings # Assumed to be in the same directory.
